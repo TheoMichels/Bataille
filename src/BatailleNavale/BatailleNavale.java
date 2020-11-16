@@ -14,7 +14,7 @@ public class BatailleNavale {
 		}
 	}
 	
-	// affiche le tableau, les 0 correspondent à des emplacements vides et les 1 correspondent à un bateau
+	// affiche le tableau, les 0 correspondent ï¿½ des emplacements vides et les 1 correspondent ï¿½ un bateau
 	public String Afficher() {
 		String grille = "Voici votre grille :\n\n";
 		for(int j=0;j<matrice.length;j++) {
@@ -26,21 +26,29 @@ public class BatailleNavale {
 		return grille;
 	}
 	
-	// créé un bateau en fonction des coordonnées que le joueur choisi
-	public void creerBateau(int x1, int y1, int x2, int y2) {
-		if(x1 == x2) {
-			for(int i=y1;i<y2+1;i++) {
-				matrice[x1][i] = 1;
+	// crï¿½ï¿½ un bateau en fonction des coordonnï¿½es que le joueur choisi
+	public boolean creerBateau(int x1, int y1, int x2, int y2) {
+		boolean coordonneesBonnes = true;
+		if ((x1 != x2) & (y1 != y2)) { 
+			System.out.println("Veuillez sÃ©lectionner Ã  nouveau car vos coordonnÃ©es sont fausses : ");
+			coordonneesBonnes = false;
+		}
+		else {
+			if(x1 == x2) {
+				for(int i=y1;i<y2+1;i++) {
+					matrice[x1][i] = 1;
+				}
+			}
+			if(y1 == y2) {
+				for(int i=x1;i<x2+1;i++) {
+					matrice[i][y1] = 1;
+				}
 			}
 		}
-		if(y1 == y2) {
-			for(int i=x1;i<x2+1;i++) {
-				matrice[i][y1] = 1;
-			}
-		}
+		return coordonneesBonnes;
 	}
 	
-	// permet de savoir si il y a un bateau à l'emplacement demandé
+	// permet de savoir si il y a un bateau ï¿½ l'emplacement demandï¿½
 	public boolean testPosition(int x, int y) {
 		boolean position;
 		if(matrice[x][y]!=1) {
@@ -48,11 +56,24 @@ public class BatailleNavale {
 		}
 		else {
 			position = true;
+			matrice[x][y] = 0;
 		}
 		return position;
 	}
 	
-	// main permettant de tester les méthodes 
+	public boolean testFin() {
+		boolean test = false;
+		int compteur = 0;
+		for(int j=0;j<matrice.length;j++) {
+			for(int i=0;i<matrice.length;i++) {
+			 if (matrice[i][j]==0) { compteur++; }
+			}
+		}
+		if (compteur == 100) { test = true;}
+		return test;
+	}
+	
+	// main permettant de tester les mï¿½thodes 
 	public static void main(String[] args) {
 		BatailleNavale test = new BatailleNavale();
 		test.creerBateau(0,1,0,5);
