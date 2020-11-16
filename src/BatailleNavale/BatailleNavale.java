@@ -14,7 +14,7 @@ public class BatailleNavale {
 		}
 	}
 	
-	// affiche le tableau, les 0 correspondent � des emplacements vides et les 1 correspondent � un bateau
+	// affiche le tableau, les 0 correspondent � des emplacements vides et les 1 correspondent a un bateau
 	public String Afficher() {
 		String grille = "Voici votre grille :\n\n";
 		for(int j=0;j<matrice.length;j++) {
@@ -26,29 +26,46 @@ public class BatailleNavale {
 		return grille;
 	}
 	
-	// cr�� un bateau en fonction des coordonn�es que le joueur choisi
+	// cree un bateau en fonction des coordonnees que le joueur choisi
 	public boolean creerBateau(int x1, int y1, int x2, int y2) {
 		boolean coordonneesBonnes = true;
 		if ((x1 != x2) & (y1 != y2)) { 
-			System.out.println("Veuillez sélectionner à nouveau car vos coordonnées sont fausses : ");
 			coordonneesBonnes = false;
 		}
-		else {
 			if(x1 == x2) {
-				for(int i=y1;i<y2+1;i++) {
-					matrice[x1][i] = 1;
+				if ((y2 - y1)>5) {
+					coordonneesBonnes = false;
+				}
+				else {
+					for(int i=y1;i<y2+1;i++) {
+						if (matrice[x1][i] == 1) {
+							coordonneesBonnes = false;
+						}
+						else {
+							matrice[x1][i] = 1;
+						}
+					}
 				}
 			}
-			if(y1 == y2) {
-				for(int i=x1;i<x2+1;i++) {
-					matrice[i][y1] = 1;
+			else if(y1 == y2) {
+				if ((x2 - x1)>5) {
+					coordonneesBonnes = false;
+				}
+				else {
+					for(int i=x1;i<x2+1;i++) {
+						if (matrice[i][y1] == 1) {
+							coordonneesBonnes = false;
+						}
+						else {
+							matrice[i][y1] = 1;
+						}
+					}
 				}
 			}
-		}
 		return coordonneesBonnes;
 	}
 	
-	// permet de savoir si il y a un bateau � l'emplacement demand�
+	// permet de savoir si il y a un bateau a l'emplacement demande
 	public boolean testPosition(int x, int y) {
 		boolean position;
 		if(matrice[x][y]!=1) {
@@ -56,24 +73,40 @@ public class BatailleNavale {
 		}
 		else {
 			position = true;
-			matrice[x][y] = 0;
 		}
 		return position;
 	}
 	
+	// permet d'attaque une position et de retourner un booleen permettant de savoir si un bateau a ete touche
+		public boolean attaquePosition(int x, int y) {
+			boolean position;
+			if(matrice[x][y]!=1) {
+				position = false;
+			}
+			else {
+				position = true;
+				matrice[x][y] = 0;
+			}
+			return position;
+		}
+		
 	public boolean testFin() {
 		boolean test = false;
 		int compteur = 0;
 		for(int j=0;j<matrice.length;j++) {
 			for(int i=0;i<matrice.length;i++) {
-			 if (matrice[i][j]==0) { compteur++; }
+				if (matrice[i][j]==0) { 
+					compteur++; 
+				}
 			}
 		}
-		if (compteur == 100) { test = true;}
+		if (compteur == 100) { 
+			test = true;
+		}
 		return test;
 	}
 	
-	// main permettant de tester les m�thodes 
+	// main permettant de tester les methodes 
 	public static void main(String[] args) {
 		BatailleNavale test = new BatailleNavale();
 		test.creerBateau(0,1,0,5);

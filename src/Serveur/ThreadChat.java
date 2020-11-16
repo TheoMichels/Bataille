@@ -46,7 +46,7 @@ public void creerBateauClient1() {
 			int coordonnee2Client1 = Integer.parseInt(in1.readLine());
 			int coordonnee3Client1 = Integer.parseInt(in1.readLine());
 			int coordonnee4Client1 = Integer.parseInt(in1.readLine());
-			if ((coordonnee1Client1!=coordonnee3Client1) & (coordonnee2Client1!=coordonnee4Client1)) {
+			if (partie.client1.creerBateau(coordonnee1Client1,coordonnee2Client1,coordonnee3Client1,coordonnee4Client1) == false) {
 				out1.println("Vos coordonnées ne sont pas bonnes, veuillez les saisir à nouveau :");
 				coordonneesOK = false;
 			}
@@ -69,7 +69,7 @@ public void creerBateauClient2() {
 		int coordonnee2Client2 = Integer.parseInt(in2.readLine());
 		int coordonnee3Client2 = Integer.parseInt(in2.readLine());
 		int coordonnee4Client2 = Integer.parseInt(in2.readLine());
-		if ((coordonnee1Client2!=coordonnee3Client2) & (coordonnee2Client2!=coordonnee4Client2)) {
+		if (partie.client2.creerBateau(coordonnee1Client2,coordonnee2Client2,coordonnee3Client2,coordonnee4Client2) == false) {
 			out2.println("Vos coordonnées ne sont pas bonnes, veuillez les saisir à nouveau :");
 			coordonneesOK = false;
 		}
@@ -88,7 +88,7 @@ public void attaqueClient1() {
 			out1.println(msgAttaque);
 			int coordonnee1PosClient1 = Integer.parseInt(in1.readLine());
 			int coordonnee2PosClient1 = Integer.parseInt(in1.readLine());
-			if (partie.client2.testPosition(coordonnee1PosClient1, coordonnee2PosClient1) ==true) { 
+			if (partie.client2.attaquePosition(coordonnee1PosClient1, coordonnee2PosClient1) ==true) { 
 				out1.println("Touché !");  
 				out2.println(nomClient1+" vous a touché !");
 			}
@@ -106,7 +106,7 @@ public void attaqueClient2() {
 		out2.println(msgAttaque);
 		int coordonnee1PosClient2 = Integer.parseInt(in2.readLine());
 		int coordonnee2PosClient2 = Integer.parseInt(in2.readLine());
-		if (partie.client1.testPosition(coordonnee1PosClient2, coordonnee2PosClient2) ==true) { 
+		if (partie.client1.attaquePosition(coordonnee1PosClient2, coordonnee2PosClient2) ==true) { 
 			out2.println("Touché !"); 
 			out1.println(nomClient2+" vous a touché !");
 		}
@@ -126,9 +126,13 @@ public void run() {
 		String msgAcceuil1 = "\nBonjour "+ nomClient1 +" ! Bienvenue dans cette nouvelle partie de bataille navale !\n";String msgAcceuil2 = "\nBonjour "+ nomClient2 +" ! Bienvenue dans cette nouvelle partie de bataille navale !\n";
 		out1.println(msgAcceuil1); out2.println(msgAcceuil2);
 		
-		// création des bateaux pour les deux clients
-		creerBateauClient1();
-		creerBateauClient2();
+		// creation de 3 bateaux pour les deux clients
+		for (int i=0; i<3; i++) {
+			creerBateauClient1();
+			out1.println("Vous avez placé votre bateau numero "+(i+1));
+			creerBateauClient2();
+			out2.println("Vous avez placé votre bateau numero "+(i+1));
+		}
 		
 		// boucle qui s'arrête lorsque un des deux clients n'a plus de bateau
 		while (partie.client1.testFin()==false & partie.client2.testFin() == false) {

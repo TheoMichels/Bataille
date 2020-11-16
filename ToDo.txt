@@ -1,3 +1,5 @@
 A faire
 
+empêcher de faire un bateau de plus de 5 éléments
 ajouter la notification "coulé"
+créer une notation des coordonnées avec des lettres 
