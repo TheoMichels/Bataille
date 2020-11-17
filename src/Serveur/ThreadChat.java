@@ -47,7 +47,7 @@ public void creerBateauClient1() {
 			int coordonnee3Client1 = Integer.parseInt(in1.readLine());
 			int coordonnee4Client1 = Integer.parseInt(in1.readLine());
 			if (partie.client1.creerBateau(coordonnee1Client1,coordonnee2Client1,coordonnee3Client1,coordonnee4Client1) == false) {
-				out1.println("Vos coordonnées ne sont pas bonnes, veuillez les saisir à nouveau :");
+				out1.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a� nouveau :");
 				coordonneesOK = false;
 			}
 			else { 
@@ -70,7 +70,7 @@ public void creerBateauClient2() {
 		int coordonnee3Client2 = Integer.parseInt(in2.readLine());
 		int coordonnee4Client2 = Integer.parseInt(in2.readLine());
 		if (partie.client2.creerBateau(coordonnee1Client2,coordonnee2Client2,coordonnee3Client2,coordonnee4Client2) == false) {
-			out2.println("Vos coordonnées ne sont pas bonnes, veuillez les saisir à nouveau :");
+			out2.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a� nouveau :");
 			coordonneesOK = false;
 		}
 		else { 
@@ -84,17 +84,17 @@ public void creerBateauClient2() {
 
 public void attaqueClient1() {
 		try {
-			String msgAttaque = "Veuillez choisir une coordonnée d'attaque :";
+			String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
 			out1.println(msgAttaque);
 			int coordonnee1PosClient1 = Integer.parseInt(in1.readLine());
 			int coordonnee2PosClient1 = Integer.parseInt(in1.readLine());
 			if (partie.client2.attaquePosition(coordonnee1PosClient1, coordonnee2PosClient1) ==true) { 
-				out1.println("Touché !");  
-				out2.println(nomClient1+" vous a touché !");
+				out1.println("Touche !");  
+				out2.println(nomClient1+" vous a touche !");
 			}
 			else { 
-				out1.println("Loupé !");
-				out2.println(nomClient1+" vous a loupé !");
+				out1.println("Loupe !");
+				out2.println(nomClient1+" vous a loupe !");
 			}
 				
 		} catch (NumberFormatException | IOException e) {e.printStackTrace();}		
@@ -102,7 +102,7 @@ public void attaqueClient1() {
 
 public void attaqueClient2() {
 	try {
-		String msgAttaque = "Veuillez choisir une coordonnée d'attaque :";
+		String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
 		out2.println(msgAttaque);
 		int coordonnee1PosClient2 = Integer.parseInt(in2.readLine());
 		int coordonnee2PosClient2 = Integer.parseInt(in2.readLine());
@@ -129,9 +129,9 @@ public void run() {
 		// creation de 3 bateaux pour les deux clients
 		for (int i=0; i<3; i++) {
 			creerBateauClient1();
-			out1.println("Vous avez placé votre bateau numero "+(i+1));
+			out1.println("Vous avez place votre bateau numero "+(i+1));
 			creerBateauClient2();
-			out2.println("Vous avez placé votre bateau numero "+(i+1));
+			out2.println("Vous avez place votre bateau numero "+(i+1));
 		}
 		
 		// boucle qui s'arrête lorsque un des deux clients n'a plus de bateau
@@ -142,11 +142,11 @@ public void run() {
 
 		if (partie.client2.testFin() == true) {
 			out1.println("Bravo "+ nomClient2 +" ! Vous avez battu "+ nomClient1+ " !");
-			out2.println("Désolé "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !");
+			out2.println("Desole "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !");
 		}
 		else if (partie.client1.testFin() == true) {
 			out2.println("Bravo "+ nomClient1 +" ! Vous avez battu "+ nomClient2+ " !");
-			out1.println("Désolé "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !");
+			out1.println("Desole "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !");
 		}
 	
 	} catch (Exception e) {}
