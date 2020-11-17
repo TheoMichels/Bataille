@@ -117,7 +117,7 @@ public class BatailleNavale {
 			}
 			return position;
 		}
-		
+	
 	public boolean testFin() {
 		boolean test = false;
 		int compteur = 0;

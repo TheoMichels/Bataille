@@ -107,12 +107,12 @@ public void attaqueClient2() {
 		int coordonnee1PosClient2 = Integer.parseInt(in2.readLine());
 		int coordonnee2PosClient2 = Integer.parseInt(in2.readLine());
 		if (partie.client1.attaquePosition(coordonnee1PosClient2, coordonnee2PosClient2) ==true) { 
-			out2.println("Touché !"); 
-			out1.println(nomClient2+" vous a touché !");
+			out2.println("Touche !"); 
+			out1.println(nomClient2+" vous a touche !");
 		}
 		else { 
-			out2.println("Loupé !");
-			out1.println(nomClient2+" vous a loupé !");
+			out2.println("Loupe !");
+			out1.println(nomClient2+" vous a loupe !");
 		}
 			
 	} catch (NumberFormatException | IOException e) {e.printStackTrace();}		
