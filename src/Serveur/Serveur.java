@@ -19,7 +19,7 @@ public class Serveur {
 		
 		try {
 			ServerSocket ecoute = new ServerSocket(1500);
-			System.out.println("Serveur lancé!");
+			System.out.println("Serveur lance!");
 			int id=0;	
 			while(true) {
 			Socket client1 = ecoute.accept();

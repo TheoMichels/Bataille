@@ -1,5 +1,6 @@
 A faire
 
-empÃªcher de faire un bateau de plus de 5 Ã©lÃ©ments
-ajouter la notification "coulÃ©"
-crÃ©er une notation des coordonnÃ©es avec des lettres 
+
+empêcher les cases libres de s'incrémenter lorsque il y a juste certaines cases de prises 
+personnaliser le message d'erreur des coordonnées pour indiquer quel est le problème 
+ajouter la notification "coule"

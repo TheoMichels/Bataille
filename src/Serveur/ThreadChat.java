@@ -42,16 +42,14 @@ public void creerBateauClient1() {
 		out1.println(msgCreerBateau);
 		boolean coordonneesOK;
 		do {
-			int coordonnee1Client1 = Integer.parseInt(in1.readLine());
-			int coordonnee2Client1 = Integer.parseInt(in1.readLine());
-			int coordonnee3Client1 = Integer.parseInt(in1.readLine());
-			int coordonnee4Client1 = Integer.parseInt(in1.readLine());
-			if (partie.client1.creerBateau(coordonnee1Client1,coordonnee2Client1,coordonnee3Client1,coordonnee4Client1) == false) {
+			String coordonneeXClient1 = in1.readLine();
+			String coordonneeYClient1 = in1.readLine();
+			if (partie.client1.creerBateau(coordonneeXClient1, coordonneeYClient1) == false) {
 				out1.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :");
 				coordonneesOK = false;
 			}
 			else { 
-				partie.client1.creerBateau(coordonnee1Client1,coordonnee2Client1,coordonnee3Client1,coordonnee4Client1);
+				partie.client1.creerBateau(coordonneeXClient1, coordonneeYClient1);
 				out1.println(partie.client1.Afficher());
 				coordonneesOK = true;
 			}
@@ -65,16 +63,14 @@ public void creerBateauClient2() {
 		out2.println(msgCreerBateau);
 		boolean coordonneesOK;
 		do {
-		int coordonnee1Client2 = Integer.parseInt(in2.readLine());
-		int coordonnee2Client2 = Integer.parseInt(in2.readLine());
-		int coordonnee3Client2 = Integer.parseInt(in2.readLine());
-		int coordonnee4Client2 = Integer.parseInt(in2.readLine());
-		if (partie.client2.creerBateau(coordonnee1Client2,coordonnee2Client2,coordonnee3Client2,coordonnee4Client2) == false) {
+			String coordonneeXClient2 = in2.readLine();
+			String coordonneeYClient2 = in2.readLine();
+		if (partie.client2.creerBateau(coordonneeXClient2, coordonneeYClient2) == false) {
 			out2.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :");
 			coordonneesOK = false;
 		}
 		else { 
-			partie.client2.creerBateau(coordonnee1Client2,coordonnee2Client2,coordonnee3Client2,coordonnee4Client2);
+			partie.client2.creerBateau(coordonneeXClient2, coordonneeYClient2);
 			out2.println(partie.client2.Afficher());
 			coordonneesOK = true;
 		}
@@ -86,9 +82,8 @@ public void attaqueClient1() {
 		try {
 			String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
 			out1.println(msgAttaque);
-			int coordonnee1PosClient1 = Integer.parseInt(in1.readLine());
-			int coordonnee2PosClient1 = Integer.parseInt(in1.readLine());
-			if (partie.client2.attaquePosition(coordonnee1PosClient1, coordonnee2PosClient1) ==true) { 
+			String coordonneeClient1 = in1.readLine();
+			if (partie.client2.attaquePosition(coordonneeClient1) ==true) { 
 				out1.println("Touche !");  
 				out2.println(nomClient1+" vous a touche !");
 			}
@@ -104,9 +99,8 @@ public void attaqueClient2() {
 	try {
 		String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
 		out2.println(msgAttaque);
-		int coordonnee1PosClient2 = Integer.parseInt(in2.readLine());
-		int coordonnee2PosClient2 = Integer.parseInt(in2.readLine());
-		if (partie.client1.attaquePosition(coordonnee1PosClient2, coordonnee2PosClient2) ==true) { 
+		String coordonneeClient2 = in2.readLine();
+		if (partie.client1.attaquePosition(coordonneeClient2) ==true) { 
 			out2.println("Touche !"); 
 			out1.println(nomClient2+" vous a touche !");
 		}
@@ -122,7 +116,8 @@ public void run() {
 	try {
 		// initialisation de la partie et acceuil
 		partie = new Partie();
-		nomClient1 = in1.readLine(); nomClient2 = in2.readLine();
+		nomClient1 = in1.readLine(); out1.println("En attente de l'autre joueur...");
+		nomClient2 = in2.readLine(); out2.println("En attente de l'autre joueur...");
 		String msgAcceuil1 = "\nBonjour "+ nomClient1 +" ! Bienvenue dans cette nouvelle partie de bataille navale !\n";String msgAcceuil2 = "\nBonjour "+ nomClient2 +" ! Bienvenue dans cette nouvelle partie de bataille navale !\n";
 		out1.println(msgAcceuil1); out2.println(msgAcceuil2);
 		
