@@ -65,6 +65,34 @@ public class BatailleNavale {
 		return coordonneesBonnes;
 	}
 	
+	// permet de parcourir l'emplacement d'un bateau 
+	public boolean testBateau(int x1, int y1, int x2, int y2) {
+		int compteur = 0;
+		boolean bateauCoule = true;
+			if(x1 == x2) {
+				for(int i=y1;i<y2+1;i++) {
+					if (matrice[x1][i] == 0) {
+						compteur++;
+					}
+						else {
+							matrice[x1][i] = 1;
+						}
+					}
+				}
+			
+			else if(y1 == y2) {
+				for(int i=y1;i<y2+1;i++) {
+					if (matrice[x1][i] == 0) {
+						compteur++;
+					}
+						else {
+							matrice[x1][i] = 1;
+						}
+					}
+				}
+		return bateauCoule;
+	}
+	
 	// permet de savoir si il y a un bateau a l'emplacement demande
 	public boolean testPosition(int x, int y) {
 		boolean position;
