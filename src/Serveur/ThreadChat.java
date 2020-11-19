@@ -35,17 +35,17 @@ public ThreadChat(int id,Socket client1, Socket client2) {
 	}catch (Exception e) {}
 }
 
-
+//
 public void creerBateauClient1() {
 	try {
-		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau";
+		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau :\n";
 		out1.println(msgCreerBateau);
 		boolean coordonneesOK;
 		do {
 			String coordonneeXClient1 = in1.readLine();
 			String coordonneeYClient1 = in1.readLine();
 			if (partie.client1.creerBateau(coordonneeXClient1, coordonneeYClient1) == false) {
-				out1.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :");
+				out1.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :\n");
 				coordonneesOK = false;
 			}
 			else { 
@@ -59,14 +59,14 @@ public void creerBateauClient1() {
 
 public void creerBateauClient2() {
 	try {
-		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau";
+		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau :\n";
 		out2.println(msgCreerBateau);
 		boolean coordonneesOK;
 		do {
 			String coordonneeXClient2 = in2.readLine();
 			String coordonneeYClient2 = in2.readLine();
 		if (partie.client2.creerBateau(coordonneeXClient2, coordonneeYClient2) == false) {
-			out2.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :");
+			out2.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a  nouveau :\n");
 			coordonneesOK = false;
 		}
 		else { 
@@ -80,16 +80,16 @@ public void creerBateauClient2() {
 
 public void attaqueClient1() {
 		try {
-			String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
+			String msgAttaque = "Veuillez choisir une coordonnee d'attaque :\n";
 			out1.println(msgAttaque);
 			String coordonneeClient1 = in1.readLine();
 			if (partie.client2.attaquePosition(coordonneeClient1) ==true) { 
-				out1.println("Touche !");  
-				out2.println(nomClient1+" vous a touche !");
+				out1.println("Touche !\n");  
+				out2.println(nomClient1+" vous a touche !\n");
 			}
 			else { 
 				out1.println("Loupe !");
-				out2.println(nomClient1+" vous a loupe !");
+				out2.println(nomClient1+" vous a loupe !\n");
 			}
 				
 		} catch (NumberFormatException | IOException e) {e.printStackTrace();}		
@@ -97,16 +97,16 @@ public void attaqueClient1() {
 
 public void attaqueClient2() {
 	try {
-		String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
+		String msgAttaque = "Veuillez choisir une coordonnee d'attaque :\n";
 		out2.println(msgAttaque);
 		String coordonneeClient2 = in2.readLine();
 		if (partie.client1.attaquePosition(coordonneeClient2) ==true) { 
-			out2.println("Touche !"); 
-			out1.println(nomClient2+" vous a touche !");
+			out2.println("Touche !\n"); 
+			out1.println(nomClient2+" vous a touche !\n");
 		}
 		else { 
 			out2.println("Loupe !");
-			out1.println(nomClient2+" vous a loupe !");
+			out1.println(nomClient2+" vous a loupe !\n");
 		}
 			
 	} catch (NumberFormatException | IOException e) {e.printStackTrace();}		
@@ -122,26 +122,30 @@ public void run() {
 		out1.println(msgAcceuil1); out2.println(msgAcceuil2);
 		
 		// creation de 3 bateaux pour les deux clients
-		for (int i=0; i<3; i++) {
+		for (int i=0; i<1; i++) {
 			creerBateauClient1();
-			out1.println("Vous avez place votre bateau numero "+(i+1));
+			out1.println("Vous avez place votre bateau numero "+(i+1)+"\n");
 			creerBateauClient2();
-			out2.println("Vous avez place votre bateau numero "+(i+1));
+			out2.println("Vous avez place votre bateau numero "+(i+1)+"\n");
 		}
 		
-		// boucle qui s'arrÃªte lorsque un des deux clients n'a plus de bateau
-		while (partie.client1.testFin()==false & partie.client2.testFin() == false) {
+		// boucle qui s'arrete lorsque un des deux clients n'a plus de bateau
+		do {
 		attaqueClient1();
 		attaqueClient2();
-		}
+		} while (partie.client1.testFin()==false & partie.client2.testFin() == false);
 
-		if (partie.client2.testFin() == true) {
-			out1.println("Bravo "+ nomClient2 +" ! Vous avez battu "+ nomClient1+ " !");
-			out2.println("Desole "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !");
+		if (partie.client2.testFin() == true & partie.client1.testFin() == false) {
+			out1.println("Bravo "+ nomClient2 +" ! Vous avez battu "+ nomClient1+ " !\n");
+			out2.println("Desole "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !\n");
 		}
-		else if (partie.client1.testFin() == true) {
-			out2.println("Bravo "+ nomClient1 +" ! Vous avez battu "+ nomClient2+ " !");
-			out1.println("Desole "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !");
+		else if (partie.client1.testFin() == true & partie.client2.testFin() == false) {
+			out2.println("Bravo "+ nomClient1 +" ! Vous avez battu "+ nomClient2+ " !\n");
+			out1.println("Desole "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !\n");
+		}
+		else if (partie.client1.testFin() == true & partie.client2.testFin() == true) {
+			out2.println("Oups, je crois bien qu'il y a match nul !");
+			out1.println("Oups, je crois bien qu'il y a match nul !");
 		}
 	
 	} catch (Exception e) {}

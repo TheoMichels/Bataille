@@ -18,11 +18,18 @@ public class BatailleNavale {
 	// affiche le tableau, les 0 correspondent � des emplacements vides et les 1 correspondent a un bateau
 	public String Afficher() {
 		String grille = "Voici votre grille :\n\n";
+		grille = "   ";
+		for(int i = 0;i<matrice.length;i++) {
+			grille += " " + conv[i];
+		}
+		grille += "\n\n";
 		for(int j=0;j<matrice.length;j++) {
+			if (j<9) grille += (j+1)+"   ";
+			else { grille += (j+1)+"  ";}
 			for(int i=0;i<matrice.length;i++) {
-			grille += matrice[i][j];
+				grille += matrice[i][j]+" ";
 			}
-			grille += "\n";
+				grille += "\n";
 		}
 		return grille;
 	}
@@ -46,7 +53,7 @@ public class BatailleNavale {
 			coordonneesBonnes = false;
 		}
 			if(x[0] == y[0]) {
-				if ((y[1] - x[1])>5) {
+				if ((y[1] - x[1])>=5) {
 					coordonneesBonnes = false;
 				}
 				else {
@@ -61,7 +68,7 @@ public class BatailleNavale {
 				}
 			}
 			else if(x[1] == y[1]) {
-				if ((y[0] - x[0])>5) {
+				if ((y[0] - x[0])>=5) {
 					coordonneesBonnes = false;
 				}
 				else {
@@ -152,12 +159,10 @@ public class BatailleNavale {
 	}
 	
 	// main permettant de tester les methodes 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		BatailleNavale test = new BatailleNavale();
-		test.creerBateau(0,1,0,5);
-		test.creerBateau(2,3,5,3);
+		
 		String grille = test.Afficher();
 		System.out.println(grille);
-		System.out.println(test.testPosition(0,9));
-	}*/
+	}
 }
