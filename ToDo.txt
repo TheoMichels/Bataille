@@ -1,6 +1,0 @@
-A faire
-
-
-empecher les cases libres de s'incrementer lorsque il y a juste certaines cases de prises 
-personnaliser le message d'erreur des coordonnees pour indiquer quel est le probleme 
-ajouter la notification "coule"
