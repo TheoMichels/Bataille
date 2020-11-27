@@ -62,15 +62,20 @@ public void creerBateauClient(BufferedReader in, PrintWriter out, BatailleNavale
 		do {
 			coordonneeXClient = in.readLine();
 			coordonneeYClient = in.readLine();
+			
 			msgErreur = client.creerBateau(coordonneeXClient, coordonneeYClient, tour);
+			
 			if (msgErreur == "Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.") {
-				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
+				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
 			else if (msgErreur == "Votre bateau ne fait pas la bonne taille.") {
-				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
+				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
 			else if (msgErreur == "Il y a deja un bateau a cet emplacement.") {
-				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
+				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
+			}
+			else if (msgErreur == "Il y a un probleme, veuillez recommencer.") {
+				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
 			else if (msgErreur == null){ 
 				out.println(client.Afficher());
@@ -110,9 +115,9 @@ public void run() {
 		// creation de 3 bateaux pour les deux clients
 		for (int i=0; i<3; i++) {
 			creerBateauClient(in1, out1, partie.client1, i);
-			out1.println("Vous avez place votre bateau numero "+(i+1));
+			out1.println("Vous avez place votre bateau numero "+(i+1)+"\n");
 			creerBateauClient(in2, out2, partie.client2, i);
-			out2.println("Vous avez place votre bateau numero "+(i+1));
+			out2.println("Vous avez place votre bateau numero "+(i+1)+"\n");
 		}
 		
 		// boucle qui execute 10 tours (nombre minimum de tours a realiser avant qu'une partie puisse potentiellement se terminer) -> evite la verification des matrices a chaque tour 

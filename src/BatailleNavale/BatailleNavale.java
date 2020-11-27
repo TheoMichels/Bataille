@@ -42,7 +42,7 @@ public class BatailleNavale {
 		int[] y = convert(coordY);
 
 		String msgErreur = null;
-		int compteur =0;
+		int compteur = 0;
 		
 		// verifie si les coordonnees sont diagonales -> refus des coordonnees le cas echeant 
 		if ((x[0] != y[0]) & (x[1] != y[1])) { 
@@ -86,20 +86,19 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[1]][i-1] == 0) {
+							if (matrice[i][x[1]-1] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 2) {
 							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[x[1]][i-1] = 1;
+								matrice[i][x[1]-1] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
 						else {
 							msgErreur = "Il y a deja un bateau a cet emplacement.";
 						}
-						
 					}
 				}
 				
@@ -141,20 +140,19 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[1]][i-1] == 0) {
+							if (matrice[i][x[1]-1] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 3) {
 							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[x[1]][i-1] = 1;
+									matrice[i][x[1]-1] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
 						else {
 							msgErreur = "Il y a deja un bateau a cet emplacement.";
 						}
-						
 					}
 				}
 		}
@@ -167,15 +165,15 @@ public class BatailleNavale {
 						msgErreur = "Votre bateau ne fait pas la bonne taille.";
 					}
 					else {
-						for(int i=x[0];i<y[0]+1;i++) {
+						for(int i=x[1];i<y[1]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[1]][i-1] == 0) {
+							if (matrice[x[0]][i-1] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 5) {
-							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[x[1]][i-1] = 1;
+							for(int i=x[1];i<y[1]+1;i++) {
+									matrice[x[0]][i-1] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -195,20 +193,19 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[1]][i-1] == 0) {
+							if (matrice[i][x[1]-1] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 5) {
 							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[x[1]][i-1] = 1;
+									matrice[i][x[1]-1] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
 						else {
 							msgErreur = "Il y a deja un bateau a cet emplacement.";
 						}
-						
 					}
 				}
 		}
@@ -267,12 +264,25 @@ public class BatailleNavale {
 	}
 	
 	// main permettant de tester les methodes 
+	
 	/*public static void main(String[] args) {
 		BatailleNavale test = new BatailleNavale();
-		test.creerBateau(0,1,0,5);
-		test.creerBateau(2,3,5,3);
+		
+		String msg1 = test.creerBateau("A1","A2", 0);
 		String grille = test.Afficher();
 		System.out.println(grille);
-		System.out.println(test.testPosition(0,9));
+		System.out.println(msg1);
+		
+		
+		String msg2 = test.creerBateau("A2","C2", 1);
+		grille = test.Afficher();
+		System.out.println(grille);
+		System.out.println(msg2);
+		
+		
+		String msg3 = test.creerBateau("A1","A2", 2);
+		grille = test.Afficher();
+		System.out.println(grille);
+		System.out.println(msg1);
 	}*/
 }
