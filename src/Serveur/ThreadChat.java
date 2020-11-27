@@ -36,24 +36,47 @@ public ThreadChat(int id,Socket client1, Socket client2) {
 }
 
 
-public void creerBateauClient(BufferedReader in, PrintWriter out, BatailleNavale client) {
+public void creerBateauClient(BufferedReader in, PrintWriter out, BatailleNavale client,int tour) {
 	try {
-		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau";
+		String msgErreur;
+		String coordonneeXClient;
+		String coordonneeYClient;
+		
+		String msgCreerBateau = "Veuillez saisir vos coordonnees d'emplacement de votre bateau n°"+(tour+1)+".";
+		String msgTour1 = "Votre premier bateau doit avoir une taille de 2 :";
+		String msgTour2 = "Votre deuxieme bateau doit avoir une taille de 3 :";
+		String msgTour3 = "Votre troisieme bateau doit avoir une taille de 5 :";
+		
 		out.println(msgCreerBateau);
-		boolean coordonneesOK;
+		
+		if(tour==0) {
+			out.println(msgTour1);
+		}
+		else if(tour==1) {
+			out.println(msgTour2);
+		}
+		else if(tour==2) {
+			out.println(msgTour3);
+		}
+		
 		do {
-			String coordonneeXClient = in.readLine();
-			String coordonneeYClient = in.readLine();
-			if (client.creerBateau(coordonneeXClient, coordonneeYClient) == false) {
-				out.println("Vos coordonnees ne sont pas bonnes, veuillez les saisir a� nouveau :");
-				coordonneesOK = false;
+			coordonneeXClient = in.readLine();
+			coordonneeYClient = in.readLine();
+			msgErreur = client.creerBateau(coordonneeXClient, coordonneeYClient, tour);
+			if (msgErreur == "Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.") {
+				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
 			}
-			else { 
-				client.creerBateau(coordonneeXClient, coordonneeYClient);
+			else if (msgErreur == "Votre bateau ne fait pas la bonne taille.") {
+				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
+			}
+			else if (msgErreur == "Il y a deja un bateau a cet emplacement.") {
+				out.println(msgErreur+". Veuillez saisir à nouveau les coordonnees :");
+			}
+			else if (msgErreur == null){ 
 				out.println(client.Afficher());
-				coordonneesOK = true;
 			}
-		} while(coordonneesOK == false);
+		} while(msgErreur != null);
+		
 	} catch (NumberFormatException | IOException e) { e.printStackTrace();}
 }
 
@@ -86,25 +109,37 @@ public void run() {
 		
 		// creation de 3 bateaux pour les deux clients
 		for (int i=0; i<3; i++) {
-			creerBateauClient(in1, out1, partie.client1);
+			creerBateauClient(in1, out1, partie.client1, i);
 			out1.println("Vous avez place votre bateau numero "+(i+1));
-			creerBateauClient(in2, out2, partie.client2);
+			creerBateauClient(in2, out2, partie.client2, i);
 			out2.println("Vous avez place votre bateau numero "+(i+1));
 		}
 		
-		// boucle qui s'arrête lorsque un des deux clients n'a plus de bateau
+		// boucle qui execute 10 tours (nombre minimum de tours a realiser avant qu'une partie puisse potentiellement se terminer) -> evite la verification des matrices a chaque tour 
+		for(int i=0; i<10; i++) {
+			attaqueClient(in1, out1, out2, partie.client1);
+			attaqueClient(in2, out2, out1, partie.client2);
+		}
+		
+		// boucle qui continue a executer des tours tant que personne n'a gagne (verification complete des matrices a chaque tour)
 		while (partie.client1.testFin()==false & partie.client2.testFin() == false) {
-		attaqueClient(in1, out1, out2, partie.client1);
-		attaqueClient(in2, out2, out1, partie.client2);
+			attaqueClient(in1, out1, out2, partie.client1);
+			attaqueClient(in2, out2, out1, partie.client2);
 		}
 
-		if (partie.client2.testFin() == true) {
-			out1.println("Bravo "+ nomClient2 +" ! Vous avez battu "+ nomClient1+ " !");
-			out2.println("Desole "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !");
+		// message de fin personnalise en fonction de quel joueur a gagne 
+		if (partie.client2.testFin() == true & partie.client1.testFin() == false) {
+			out1.println("Bravo "+ nomClient1 +" ! Vous avez battu "+ nomClient2+ " !");
+			out2.println("Desole "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !");
 		}
-		else if (partie.client1.testFin() == true) {
-			out2.println("Bravo "+ nomClient1 +" ! Vous avez battu "+ nomClient2+ " !");
-			out1.println("Desole "+ nomClient2 +" ! "+ nomClient1+ " vous a battu !");
+		else if (partie.client2.testFin() == false & partie.client1.testFin() == true) {
+			out2.println("Bravo "+ nomClient2 +" ! Vous avez battu "+ nomClient1+ " !");
+			out1.println("Desole "+ nomClient1 +" ! "+ nomClient2+ " vous a battu !");
+		}
+		else if (partie.client2.testFin() == true & partie.client1.testFin() == true) {
+			String msgFin = "Wow ! Vous avez tous les deux fini de couler les bateaux adverses en meme temps, il y a egalite !";
+			out2.println(msgFin);
+			out1.println(msgFin);
 		}
 	
 	} catch (Exception e) {}

@@ -1,11 +1,5 @@
 T0D0
-
-- boucle for puis boucle while pour les attaque
-
-- empecher les cases libres de s'incrementer lorsque il y a juste certaines cases de prises 
-
-- changer l'algo pour qu'il permette de personnaliser le message d'erreur des coordonnees pour indiquer quel est le probleme 
+ 
+- corriger problemes coordonne horizontales
 
 - ajouter la notification "coule"
-
-- optimiser le code, enlever au maximum les méthodes doubles etc

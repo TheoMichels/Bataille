@@ -37,74 +37,189 @@ public class BatailleNavale {
     }
 	
 	// cree un bateau en fonction des coordonnees que le joueur choisi
-	public boolean creerBateau(String coordX, String coordY) {
+	public String creerBateau(String coordX, String coordY, int tour) {
 		int[] x = convert(coordX);
 		int[] y = convert(coordY);
 
-		boolean coordonneesBonnes = true;
+		String msgErreur = null;
+		int compteur =0;
+		
+		// verifie si les coordonnees sont diagonales -> refus des coordonnees le cas echeant 
 		if ((x[0] != y[0]) & (x[1] != y[1])) { 
-			coordonneesBonnes = false;
+			msgErreur = "Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.";
 		}
-			if(x[0] == y[0]) {
-				if ((y[1] - x[1])>5) {
-					coordonneesBonnes = false;
-				}
-				else {
-					for(int i=x[1];i<y[1]+1;i++) {
-						if (matrice[x[0]][i-1] == 1) {
-							coordonneesBonnes = false;
+		
+		
+		else if(tour == 0) {
+			// condition si les coordonnes sont verticales 
+				if(x[0] == y[0]) {
+					// si les coordonnes ne cree pas un bateau de taille 2 -> refus des coordonnees 
+					if ((y[1] - x[1]) != 1) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[1];i<y[1]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[0]][i-1] == 0) {
+								compteur++;
+							}
 						}
+						if(compteur == 2) {
+							for(int i=x[1];i<y[1]+1;i++) {
+									matrice[x[0]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
 						else {
-							matrice[x[0]][i-1] = 1;
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
 						}
+						
 					}
 				}
-			}
-			else if(x[1] == y[1]) {
-				if ((y[0] - x[0])>5) {
-					coordonneesBonnes = false;
-				}
-				else {
-					for(int i=x[0];i<y[0]+1;i++) {
-						if (matrice[i][x[1]-1] == 1) {
-							coordonneesBonnes = false;
+				
+				// condition si les coordonnes sont horizontales
+				else if(x[1] == y[1]) {
+					// si les coordonnes ne cree pas un bateau de taille 2 -> refus des coordonnees 
+					if ((y[0] - x[0]) != 1) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[0];i<y[0]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[1]][i-1] == 0) {
+								compteur++;
+							}
 						}
+						if(compteur == 2) {
+							for(int i=x[0];i<y[0]+1;i++) {
+									matrice[x[1]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
 						else {
-							matrice[i][x[1]-1] = 1;
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
 						}
+						
 					}
 				}
-			}
-		return coordonneesBonnes;
+				
+		}
+		
+		else if(tour == 1) {
+			// condition si les coordonnes sont verticales 
+				if(x[0] == y[0]) {
+					// si les coordonnes ne cree pas un bateau de taille 3 -> refus des coordonnees 
+					if ((y[1] - x[1]) != 2) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[1];i<y[1]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[0]][i-1] == 0) {
+								compteur++;
+							}
+						}
+						if(compteur == 3) {
+							for(int i=x[1];i<y[1]+1;i++) {
+									matrice[x[0]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
+						else {
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
+						}
+						
+					}
+				}
+				
+				// condition si les coordonnes sont horizontales
+				else if(x[1] == y[1]) {
+					// si les coordonnes ne cree pas un bateau de taille 3 -> refus des coordonnees 
+					if ((y[0] - x[0]) != 2) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[0];i<y[0]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[1]][i-1] == 0) {
+								compteur++;
+							}
+						}
+						if(compteur == 3) {
+							for(int i=x[0];i<y[0]+1;i++) {
+									matrice[x[1]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
+						else {
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
+						}
+						
+					}
+				}
+		}
+		
+		else if(tour == 2) {
+			// condition si les coordonnes sont verticales 
+				if(x[0] == y[0]) {
+					// si les coordonnes ne cree pas un bateau de taille 5 -> refus des coordonnees 
+					if ((y[1] - x[1]) != 4) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[0];i<y[0]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[1]][i-1] == 0) {
+								compteur++;
+							}
+						}
+						if(compteur == 5) {
+							for(int i=x[0];i<y[0]+1;i++) {
+									matrice[x[1]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
+						else {
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
+						}
+						
+					}
+				}
+				
+				// condition si les coordonnes sont horizontales
+				else if(x[1] == y[1]) {
+					// si les coordonnes ne cree pas un bateau de taille 5 -> refus des coordonnees 
+					if ((y[0] - x[0]) != 4) {
+						msgErreur = "Votre bateau ne fait pas la bonne taille.";
+					}
+					else {
+						for(int i=x[0];i<y[0]+1;i++) {
+							// verifie s'il y a deja un bateau a l'endroit indiqué 
+							if (matrice[x[1]][i-1] == 0) {
+								compteur++;
+							}
+						}
+						if(compteur == 5) {
+							for(int i=x[0];i<y[0]+1;i++) {
+									matrice[x[1]][i-1] = 1;
+							}
+						}
+						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
+						else {
+							msgErreur = "Il y a deja un bateau a cet emplacement.";
+						}
+						
+					}
+				}
+		}
+		
+		else {
+			msgErreur = "Il y a un probleme, veuillez recommencer.";
+		}
+		
+		return msgErreur;
 	}
 	
-	// permet de parcourir l'emplacement d'un bateau 
-	public boolean testBateau(int x1, int y1, int x2, int y2) {
-		int compteur = 0;
-		boolean bateauCoule = true;
-			if(x1 == x2) {
-				for(int i=y1;i<y2+1;i++) {
-					if (matrice[x1][i] == 0) {
-						compteur++;
-					}
-						else {
-							matrice[x1][i] = 1;
-						}
-					}
-				}
-			
-			else if(y1 == y2) {
-				for(int i=y1;i<y2+1;i++) {
-					if (matrice[x1][i] == 0) {
-						compteur++;
-					}
-						else {
-							matrice[x1][i] = 1;
-						}
-					}
-				}
-		return bateauCoule;
-	}
 	
 	// permet de savoir si il y a un bateau a l'emplacement demande
 	public boolean testPosition(String coord) {
