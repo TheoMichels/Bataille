@@ -1,12 +1,12 @@
 package BatailleNavale;
 
-public class BatailleNavale {
+public class Bataille {
 	
 	int[][] matrice;
 	public static char[] conv= {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 	
 	// l'objet BatailleNavale instancie un tableau pour un joueur en particulier 
-	public BatailleNavale() {
+	public Bataille() {
 		matrice = new int[10][10];
 		for(int j=0;j<matrice.length;j++) {
 			for(int i=0;i<matrice.length;i++) {
@@ -60,13 +60,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[1];i<y[1]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[0]][i-1] == 0) {
+							if (matrice[x[0]][i] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 2) {
 							for(int i=x[1];i<y[1]+1;i++) {
-									matrice[x[0]][i-1] = 1;
+									matrice[x[0]][i] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -86,13 +86,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[i][x[1]-1] == 0) {
+							if (matrice[i][x[1]] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 2) {
 							for(int i=x[0];i<y[0]+1;i++) {
-								matrice[i][x[1]-1] = 1;
+								matrice[i][x[1]] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -114,13 +114,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[1];i<y[1]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[0]][i-1] == 0) {
+							if (matrice[x[0]][i] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 3) {
 							for(int i=x[1];i<y[1]+1;i++) {
-									matrice[x[0]][i-1] = 1;
+									matrice[x[0]][i] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -140,13 +140,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[i][x[1]-1] == 0) {
+							if (matrice[i][x[1]] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 3) {
 							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[i][x[1]-1] = 1;
+									matrice[i][x[1]] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -167,13 +167,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[1];i<y[1]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[x[0]][i-1] == 0) {
+							if (matrice[x[0]][i] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 5) {
 							for(int i=x[1];i<y[1]+1;i++) {
-									matrice[x[0]][i-1] = 1;
+									matrice[x[0]][i] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -193,13 +193,13 @@ public class BatailleNavale {
 					else {
 						for(int i=x[0];i<y[0]+1;i++) {
 							// verifie s'il y a deja un bateau a l'endroit indiqué 
-							if (matrice[i][x[1]-1] == 0) {
+							if (matrice[i][x[1]] == 0) {
 								compteur++;
 							}
 						}
 						if(compteur == 5) {
 							for(int i=x[0];i<y[0]+1;i++) {
-									matrice[i][x[1]-1] = 1;
+									matrice[i][x[1]] = 1;
 							}
 						}
 						// si toutes les conditions sont verifiees -> la valeur 0 se transforme en 1 
@@ -223,7 +223,7 @@ public class BatailleNavale {
 		boolean position;
 		int[] x = convert(coord);
 
-		if(matrice[x[0]][x[1]-1]!=1) {
+		if(matrice[x[0]][x[1]]!=1) {
 			position = false;
 		}
 		else {
@@ -237,11 +237,11 @@ public class BatailleNavale {
 		boolean position;
 		int[] x = convert(coord);
 
-		if(matrice[x[0]][x[1]-1]!=1) {
+		if(matrice[x[0]][x[1]]!=1) {
 			position = false;
 		}
 		else {
-			matrice[x[0]][x[1]-1] = 0;
+			matrice[x[0]][x[1]] = 0;
 			position = true;
 		}
 		return position;

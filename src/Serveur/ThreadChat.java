@@ -1,12 +1,13 @@
 package Serveur;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import BatailleNavale.BatailleNavale;
+import BatailleNavale.Bataille;
 import BatailleNavale.Partie;
 
 public class ThreadChat extends Thread{
@@ -36,7 +37,7 @@ public ThreadChat(int id,Socket client1, Socket client2) {
 }
 
 
-public void creerBateauClient(BufferedReader in, PrintWriter out, BatailleNavale client,int tour) {
+public void creerBateauClient(BufferedReader in, PrintWriter out, Bataille client,int tour) {
 	try {
 		String msgErreur;
 		String coordonneeXClient;
@@ -85,18 +86,18 @@ public void creerBateauClient(BufferedReader in, PrintWriter out, BatailleNavale
 	} catch (NumberFormatException | IOException e) { e.printStackTrace();}
 }
 
-public void attaqueClient(BufferedReader in, PrintWriter out1,PrintWriter out2, BatailleNavale client) {
+public void attaqueClient(BufferedReader in, PrintWriter out,PrintWriter outAdversaire, Bataille client) {
 		try {
 			String msgAttaque = "Veuillez choisir une coordonnee d'attaque :";
-			out1.println(msgAttaque);
+			out.println(msgAttaque);
 			String coordonneeClient = in.readLine();
 			if (client.attaquePosition(coordonneeClient) ==true) { 
-				out1.println("Touche !");  
-				out2.println(nomClient1+" vous a touche !");
+				out.println("Touche !");  
+				outAdversaire.println(nomClient1+" vous a touche !");
 			}
 			else { 
-				out1.println("Loupe !");
-				out2.println(nomClient1+" vous a loupe !");
+				out.println("Loupe !");
+				outAdversaire.println(nomClient1+" vous a loupe !");
 			}
 				
 		} catch (NumberFormatException | IOException e) {e.printStackTrace();}		
