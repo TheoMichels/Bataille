@@ -66,22 +66,22 @@ public void creerBateauClient(BufferedReader in, PrintWriter out, Bataille clien
 			
 			msgErreur = client.creerBateau(coordonneeXClient, coordonneeYClient, tour);
 			
-			if (msgErreur == "Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.") {
+			if (msgErreur.equals("Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.")) {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur == "Votre bateau ne fait pas la bonne taille.") {
+			else if (msgErreur.equals("Votre bateau ne fait pas la bonne taille.")) {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur == "Il y a deja un bateau a cet emplacement.") {
+			else if (msgErreur.equals("Il y a deja un bateau a cet emplacement.")) {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur == "Il y a un probleme, veuillez recommencer.") {
+			else if (msgErreur.equals("Il y a un probleme, veuillez recommencer.")) {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur == null){ 
+			else if (msgErreur.equals(null)){ 
 				out.println(client.Afficher());
 			}
-		} while(msgErreur != null);
+		} while(!msgErreur.equals(null));
 		
 	} catch (NumberFormatException | IOException e) { e.printStackTrace();}
 }
