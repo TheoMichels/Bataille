@@ -50,6 +50,7 @@ public void creerBateauClient(BufferedReader in, PrintWriter out, Bataille clien
 		
 		out.println(msgCreerBateau);
 		
+		// change l'indication de taille du bateau en fonction du tour
 		if(tour==0) {
 			out.println(msgTour1);
 		}
@@ -60,28 +61,29 @@ public void creerBateauClient(BufferedReader in, PrintWriter out, Bataille clien
 			out.println(msgTour3);
 		}
 		
+		//commence une boucle qui s'exécute tant qu'un bateau n'est pas correctement cree 
 		do {
 			coordonneeXClient = in.readLine();
 			coordonneeYClient = in.readLine();
 			
 			msgErreur = client.creerBateau(coordonneeXClient, coordonneeYClient, tour);
 			
-			if (msgErreur.equals("Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.")) {
+			if (msgErreur=="Les coordonnees sont en diagonales, vous n'avez pas le droit de placer un bateau de cette facon.") {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur.equals("Votre bateau ne fait pas la bonne taille.")) {
+			else if (msgErreur=="Votre bateau ne fait pas la bonne taille.") {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur.equals("Il y a deja un bateau a cet emplacement.")) {
+			else if (msgErreur=="Il y a deja un bateau a cet emplacement.") {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur.equals("Il y a un probleme, veuillez recommencer.")) {
+			else if (msgErreur=="Il y a un probleme, veuillez recommencer.") {
 				out.println(msgErreur+" Veuillez saisir à nouveau les coordonnees :");
 			}
-			else if (msgErreur.equals(null)){ 
+			else if (msgErreur==null){ 
 				out.println(client.Afficher());
 			}
-		} while(!msgErreur.equals(null));
+		} while(msgErreur != null);
 		
 	} catch (NumberFormatException | IOException e) { e.printStackTrace();}
 }
