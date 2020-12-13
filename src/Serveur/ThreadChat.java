@@ -2,6 +2,7 @@ package Serveur;
 
 import java.io.BufferedReader;
 
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -125,14 +126,18 @@ public void run() {
 		
 		// boucle qui execute 10 tours (nombre minimum de tours a realiser avant qu'une partie puisse potentiellement se terminer) -> evite la verification des matrices a chaque tour 
 		for(int i=0; i<10; i++) {
-			attaqueClient(in1, out1, out2, partie.client1);
-			attaqueClient(in2, out2, out1, partie.client2);
+			//attaque du client 1 vers le client 2
+			attaqueClient(in1, out1, out2, partie.client2);
+			//attaque du client 2 vers le client 1
+			attaqueClient(in2, out2, out1, partie.client1);
 		}
 		
 		// boucle qui continue a executer des tours tant que personne n'a gagne (verification complete des matrices a chaque tour)
 		while (partie.client1.testFin()==false & partie.client2.testFin() == false) {
-			attaqueClient(in1, out1, out2, partie.client1);
-			attaqueClient(in2, out2, out1, partie.client2);
+			//attaque du client 1 vers le client 2
+			attaqueClient(in1, out1, out2, partie.client2);
+			//attaque du client 2 vers le client 1
+			attaqueClient(in2, out2, out1, partie.client1);
 		}
 
 		// message de fin personnalise en fonction de quel joueur a gagne 

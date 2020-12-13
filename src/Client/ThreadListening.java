@@ -21,7 +21,9 @@ public class ThreadListening extends Thread {
 					System.out.println(in.readLine());
 				}
 			}
-			catch(IOException e) {};
+			catch(IOException e) { 
+				System.out.println("Il y a un pptoblème dans le thread"+e);
+			}
 		}
 		
 }
